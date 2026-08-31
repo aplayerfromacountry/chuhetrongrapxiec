@@ -3,95 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xem Tử Vi & Bói Quẻ AI</title>
+    <title>Thần Cơ Diệu Toán - Tử Vi & Quẻ Dịch</title>
     <style>
-        body { font-family: Arial, sans-serif; max-width: 700px; margin: 30px auto; padding: 20px; line-height: 1.6; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input, select, button, textarea { width: 100%; padding: 10px; box-sizing: border-box; }
-        button { background-color: #8e24aa; color: white; border: none; font-size: 16px; cursor: pointer; border-radius: 5px; }
-        button:hover { background-color: #6a1b9a; }
-        #result { margin-top: 20px; padding: 15px; background: #f5f5f5; border-radius: 5px; white-space: pre-line; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Tông màu chủ đạo: Tím than (Deep Charcoal Purple) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d0b18, #181328, #100b1e);
+            color: #e2e8f0;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            background: rgba(26, 21, 40, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(147, 112, 219, 0.25);
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+        }
+        
+        h1, h2 { text-align: center; color: #f1c40f; margin-bottom: 20px; text-shadow: 0 0 12px rgba(241, 196, 15, 0.3); }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 8px; color: #b8a9c9; font-weight: 600; }
+        
+        input[type="password"], input[type="file"], textarea {
+            width: 100%; padding: 12px; border-radius: 8px;
+            border: 1px solid rgba(147, 112, 219, 0.3);
+            background: rgba(13, 11, 24, 0.6); color: #fff; font-size: 15px; outline: none;
+            transition: border-color 0.3s;
+        }
+        input[type="password"]:focus, textarea:focus { border-color: #f1c40f; }
+
+        /* HIỆU ỨNG CHUYỂN TRANG FADE */
+        .section-page {
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out;
+        }
+        .fade-out {
+            opacity: 0;
+        }
+        .hidden { display: none !important; }
+
+        /* Menu điều hướng */
+        .menu-grid { display: grid; gap: 15px; margin-top: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+        .menu-card {
+            background: rgba(45, 34, 68, 0.5); border: 1px solid rgba(186, 147, 246, 0.3);
+            border-radius: 12px; padding: 25px 15px; text-align: center;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .menu-card:hover { 
+            background: rgba(63, 47, 95, 0.7); 
+            border-color: #f1c40f;
+            transform: translateY(-3px); 
+        }
+        .menu-card h3 { color: #f1c40f; margin-bottom: 10px; }
+
+        /* Nút bấm & khung kết quả */
+        .btn {
+            width: 100%; padding: 14px; border: none; border-radius: 8px;
+            background: linear-gradient(45deg, #d4af37, #f1c40f); color: #000;
+            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; margin-top: 10px;
+        }
+        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #ccc; margin-top: 15px; }
+        .btn:hover { opacity: 0.9; }
+        
+        .result-box {
+            margin-top: 25px; padding: 20px; border-radius: 8px;
+            background: rgba(13, 11, 24, 0.6); border-left: 4px solid #f1c40f;
+            white-space: pre-line; line-height: 1.8; font-size: 15px; max-height: 450px; overflow-y: auto;
+        }
+        .quote-box {
+            font-style: italic; background: rgba(241, 196, 15, 0.08);
+            padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed rgba(241, 196, 15, 0.4);
+        }
+        #imagePreview { max-width: 100%; max-height: 250px; margin-top: 10px; border-radius: 8px; display: none; }
     </style>
 </head>
 <body>
 
-    <h2>XEM TỬ VI & GIEO QUẺ AI</h2>
-
+<div class="container">
     <div class="form-group">
-        <label>Dán API Key của bạn vào đây:</label>
+        <label>🔑 Nhập API Key Google AI Studio:</label>
         <input type="password" id="apiKey" placeholder="AIzaSy...">
     </div>
 
-    <div class="form-group">
-        <label>Chọn hình thức xem:</label>
-        <select id="type">
-            <option value="tu_vi">Xem Tử Vi / Lá Số</option>
-            <option value="kinh_dich">Gieo Quẻ Kinh Dịch</option>
-        </select>
+    <!-- TRANG MỞ ĐẦU (LANDING PAGE) -->
+    <div id="landingPage" class="section-page">
+        <h1>☯ KHÍ ĐẠO THẦN CƠ ☯</h1>
+        <p style="text-align: center; margin-bottom: 25px; color: #94a3b8;">Chọn một phương thức để khởi tạo quẻ vận:</p>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="switchSection('landingPage', 'quePage')">
+                <h3>📜 Gieo Quẻ Thi Văn</h3>
+                <p style="font-size: 13px;">Rút quẻ ngẫu nhiên nhận triết lý danh nhân & lời giải chi tiết.</p>
+            </div>
+            <div class="menu-card" onclick="switchSection('landingPage', 'tuViPage')">
+                <h3>🖼️ Xem Lá Số Tử Vi</h3>
+                <p style="font-size: 13px;">Tải ảnh lá số tử vi lên để Thầy AI đọc & luận giải định mệnh.</p>
+            </div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label>Thông tin của bạn (Họ tên, ngày tháng năm sinh Âm/Dương, giờ sinh, hoặc câu hỏi gieo quẻ):</label>
-        <textarea id="userInfo" rows="4" placeholder="Ví dụ: Nguyễn Văn A, sinh ngày 15/08/1995 lúc 08h30 sáng (Dương lịch). Xin luận giải tổng quan công danh, sự nghiệp năm nay."></textarea>
+    <!-- KHU VỰC 1: GIEO QUẺ THI VĂN -->
+    <div id="quePage" class="section-page hidden">
+        <h2>📜 GIEO QUẺ THI VĂN NGẪU NHIÊN</h2>
+        <div class="form-group">
+            <label>Nhập điều bạn đang trăn trở / thắc mắc (hoặc để trống):</label>
+            <textarea id="queQuestion" rows="3" placeholder="Ví dụ: Công việc sắp tới của tôi có suôn sẻ không?"></textarea>
+        </div>
+        <button class="btn" onclick="gieoQue()">🎲 Bốc Quẻ Ngẫu Nhiên</button>
+        
+        <div id="queResultContainer" class="hidden">
+            <div class="result-box">
+                <div class="quote-box" id="quoteDisplay"></div>
+                <div id="queAnalysis"></div>
+            </div>
+        </div>
+        <button class="btn btn-secondary" onclick="switchSection('quePage', 'landingPage')">⬅️ Quay lại trang chủ</button>
     </div>
 
-    <button onclick="xemBoi()">Luận Giải Ngay</button>
+    <!-- KHU VỰC 2: XEM LÁ SỐ QUA ẢNH -->
+    <div id="tuViPage" class="section-page hidden">
+        <h2>🖼️ ĐỌC LÁ SỐ TỬ VI QUA ẢNH</h2>
+        <div class="form-group">
+            <label>Tải ảnh Bảng Lá Số Tử Vi của bạn lên:</label>
+            <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
+            <img id="imagePreview" alt="Lá số preview">
+        </div>
+        <div class="form-group">
+            <label>Yêu cầu cụ thể (Tùy chọn):</label>
+            <textarea id="tuViRequest" rows="2" placeholder="Ví dụ: Luận giải giúp tôi về Mệnh, Tài Bạch và Quan Lộc trong năm nay."></textarea>
+        </div>
+        <button class="btn" onclick="luanLaSo()">🔮 AI Luận Giải Lá Số</button>
 
-    <h3>Kết quả luận giải:</h3>
-    <div id="result">Kết quả sẽ xuất hiện ở đây...</div>
+        <div id="tuViResult" class="result-box hidden"></div>
+        <button class="btn btn-secondary" onclick="switchSection('tuViPage', 'landingPage')">⬅️ Quay lại trang chủ</button>
+    </div>
+</div>
 
-    <script>
-        async function xemBoi() {
-            const apiKey = document.getElementById('apiKey').value.trim();
-            const type = document.getElementById('type').value;
-            const userInfo = document.getElementById('userInfo').value.trim();
-            const resultDiv = document.getElementById('result');
+<script>
+    const quotesList = [
+        { quote: "Chuyện cũ qua rồi, chuyện mới lại đến. Nước chảy mây trôi, lòng không vướng bận.", author: "Thiền sư Thích Nhất Hạnh" },
+        { quote: "Thiện căn ở tại lòng ta / Chữ tâm kia mới bằng ba chữ tài.", author: "Nguyễn Du (Truyện Kiều)" },
+        { quote: "Người ta chỉ nhìn thấy rõ ràng bằng trái tim. Cốt lõi là điều vô hình trong mắt dung tục.", author: "Antoine de Saint-Exupéry" },
+        { quote: "Cứ đi rồi sẽ đến, cứ gõ cửa rồi cửa sẽ mở.", author: "Triết lý phương Đông" },
+        { quote: "Sống trong đời sống cần có một tấm lòng, để làm gì em biết không? Để gió cuốn đi...", author: "Trịnh Công Sơn" },
+        { quote: "Vết thương là nơi ánh sáng đi vào bạn.", author: "Rumi" }
+    ];
 
-            if (!apiKey) {
-                alert('Vui lòng nhập API Key!');
-                return;
+    // Hàm xử lý chuyển trang mượt mà (Fade Effect)
+    function switchSection(currentId, targetId) {
+        const currentEl = document.getElementById(currentId);
+        const targetEl = document.getElementById(targetId);
+
+        currentEl.classList.add('fade-out');
+
+        setTimeout(() => {
+            currentEl.classList.add('hidden');
+            currentEl.classList.remove('fade-out');
+
+            targetEl.classList.add('fade-out');
+            targetEl.classList.remove('hidden');
+
+            setTimeout(() => {
+                targetEl.classList.remove('fade-out');
+            }, 50);
+        }, 400); // 0.4s ứng với thời gian chuyển CSS
+    }
+
+    function previewImage(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('imagePreview');
+                img.src = e.target.result;
+                img.style.display = 'block';
             }
-            if (!userInfo) {
-                alert('Vui lòng nhập thông tin hoặc câu hỏi!');
-                return;
-            }
+            reader.readAsDataURL(file);
+        }
+    }
 
-            resultDiv.innerText = "Thầy AI đang bấm ngón tay luận giải, vui lòng đợi trong giây lát...";
+    async function gieoQue() {
+        const apiKey = document.getElementById('apiKey').value.trim();
+        if (!apiKey) return alert('Vui lòng nhập API Key!');
 
-            // Lời dặn đóng vai (System Instruction)
-            const systemPrompt = "Bạn là một bậc thầy cao tay về Tử Vi Đẩu Số và Kinh Dịch có 30 năm kinh nghiệm. Hãy sử dụng ngôn phong trang trọng, uyên bác nhưng dễ hiểu để luận giải. Trả lời chi tiết, khách quan, phân tích sâu sắc các khía cạnh.";
+        const randomQuote = quotesList[Math.floor(Math.random() * quotesList.length)];
+        const question = document.getElementById('queQuestion').value.trim();
 
-            const userPrompt = type === 'tu_vi' 
-                ? `Hãy lập luận giải Tử Vi dựa trên thông tin sau:\n${userInfo}`
-                : `Hãy gieo quẻ và luận giải Kinh Dịch cho câu hỏi/thông tin sau:\n${userInfo}`;
+        document.getElementById('queResultContainer').classList.remove('hidden');
+        document.getElementById('quoteDisplay').innerHTML = `<strong>" ${randomQuote.quote} "</strong><br><small>— ${randomQuote.author}</small>`;
+        document.getElementById('queAnalysis').innerText = "☯ Thầy AI đang nghiệm quẻ từ câu thơ trên, vui lòng đợi...";
+
+        const prompt = `Tôi rút được câu trích dẫn: "${randomQuote.quote}" của ${randomQuote.author}. Câu hỏi/trăn trở của tôi là: "${question || 'Xin lời khuyên tổng quan cho cuộc sống hiện tại'}". Hãy đóng vai Thầy Quẻ Kinh Dịch/Phong Thủy ứng dụng câu thơ này để giải đáp sâu sắc và đưa ra lời khuyên cho tôi.`;
+
+        try {
+            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            });
+            const data = await res.json();
+            document.getElementById('queAnalysis').innerText = data.candidates[0].content.parts[0].text;
+        } catch (e) {
+            document.getElementById('queAnalysis').innerText = "Lỗi: " + e.message;
+        }
+    }
+
+    async function luanLaSo() {
+        const apiKey = document.getElementById('apiKey').value.trim();
+        const fileInput = document.getElementById('imageInput');
+        const userRequest = document.getElementById('tuViRequest').value.trim();
+        const resultDiv = document.getElementById('tuViResult');
+
+        if (!apiKey) return alert('Vui lòng nhập API Key!');
+        if (!fileInput.files[0]) return alert('Vui lòng tải lên ảnh lá số tử vi!');
+
+        resultDiv.classList.remove('hidden');
+        resultDiv.innerText = "🔍 AI đang quét và đọc các cung sao trên lá số của bạn, vui lòng đợi trong giây lát...";
+
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = async function() {
+            const base64Data = reader.result.split(',')[1];
+            const prompt = `Bạn là chuyên gia Tử Vi Đẩu Số cao cấp. Hãy đọc bảng lá số tử vi trong hình ảnh này và luận giải chi tiết cho tôi. ${userRequest ? 'Yêu cầu thêm từ người dùng: ' + userRequest : ''}`;
 
             try {
-                // Gọi API Google AI Studio (Dùng mô hình gemini-2.5-flash)
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({
-                        system_instruction: {
-                            parts: [{ text: systemPrompt }]
-                        },
                         contents: [{
-                            parts: [{ text: userPrompt }]
+                            parts: [
+                                { text: prompt },
+                                { inline_data: { mime_type: file.type, data: base64Data } }
+                            ]
                         }]
                     })
                 });
-
-                const data = await response.json();
-
-                if (data.candidates && data.candidates[0].content.parts[0].text) {
-                    resultDiv.innerText = data.candidates[0].content.parts[0].text;
-                } else {
-                    resultDiv.innerText = "Lỗi: Không nhận được phản hồi từ AI. Hãy kiểm tra lại API Key.";
-                }
-            } catch (error) {
-                resultDiv.innerText = "Lỗi kết nối: " + error.message;
+                const data = await res.json();
+                resultDiv.innerText = data.candidates[0].content.parts[0].text;
+            } catch (e) {
+                resultDiv.innerText = "Lỗi xử lý ảnh: " + e.message;
             }
-        }
-    </script>
+        };
+        reader.readAsDataURL(file);
+    }
+</script>
 </body>
 </html>
