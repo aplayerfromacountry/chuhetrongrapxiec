@@ -258,6 +258,14 @@
             setTimeout(() => targetEl.classList.remove('fade-out'), 50);
         }, 400);
     }
+    function openChoiceModal() {
+      const modal = document.getElementById('choiceModal');
+      if (modal) {
+        modal.classList.remove('hidden');
+      } else {
+        console.error("Không tìm thấy element có id='choiceModal'");
+      }
+    }
 </script>
 
 <script src="auth.js"></script>
