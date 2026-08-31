@@ -266,6 +266,43 @@
         console.error("Không tìm thấy element có id='choiceModal'");
       }
     }
+    <script>
+    function switchSection(currentId, targetId) {
+        const currentEl = document.getElementById(currentId);
+        const targetEl = document.getElementById(targetId);
+        if (currentEl) currentEl.classList.add('fade-out');
+        setTimeout(() => {
+            if (currentEl) {
+                currentEl.classList.add('hidden');
+                currentEl.classList.remove('fade-out');
+            }
+            if (targetEl) {
+                targetEl.classList.add('fade-out');
+                targetEl.classList.remove('hidden');
+                setTimeout(() => targetEl.classList.remove('fade-out'), 50);
+            }
+        }, 400);
+    }
+
+    function openChoiceModal() {
+        const modal = document.getElementById('choiceModal');
+        if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeChoiceModal() {
+        const modal = document.getElementById('choiceModal');
+        if (modal) modal.classList.add('hidden');
+    }
+
+    function goToAuth() {
+        closeChoiceModal();
+        switchSection('heroSection', 'authSection');
+    }
+
+    function loginAsGuest() {
+        closeChoiceModal();
+        switchSection('heroSection', 'mainMenuSection');
+    }
 </script>
 
 <script src="auth.js"></script>
