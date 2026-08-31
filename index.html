@@ -3,79 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thần Cơ Diệu Toán - Tử Vi & Quẻ Dịch</title>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0d0b18, #181328, #100b1e);
-            color: #e2e8f0; min-height: 100vh; padding: 20px;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .container {
-            background: rgba(26, 21, 40, 0.7); backdrop-filter: blur(16px);
-            border: 1px solid rgba(147, 112, 219, 0.25); border-radius: 16px;
-            padding: 30px; max-width: 700px; width: 100%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-        }
-        h1, h2 { text-align: center; color: #f1c40f; margin-bottom: 20px; text-shadow: 0 0 12px rgba(241, 196, 15, 0.3); }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 8px; color: #b8a9c9; font-weight: 600; }
-        input[type="file"], textarea {
-            width: 100%; padding: 12px; border-radius: 8px;
-            border: 1px solid rgba(147, 112, 219, 0.3);
-            background: rgba(13, 11, 24, 0.6); color: #fff; font-size: 15px; outline: none;
-        }
-        .section-page { opacity: 1; transition: opacity 0.4s ease-in-out; }
-        .fade-out { opacity: 0; }
-        .hidden { display: none !important; }
-        .menu-grid { display: grid; gap: 15px; margin-top: 20px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
-        .menu-card {
-            background: rgba(45, 34, 68, 0.5); border: 1px solid rgba(186, 147, 246, 0.3);
-            border-radius: 12px; padding: 25px 15px; text-align: center; cursor: pointer; transition: all 0.3s ease;
-        }
-        .menu-card:hover { background: rgba(63, 47, 95, 0.7); border-color: #f1c40f; transform: translateY(-3px); }
-        .menu-card h3 { color: #f1c40f; margin-bottom: 10px; }
-        .btn {
-            width: 100%; padding: 14px; border: none; border-radius: 8px;
-            background: linear-gradient(45deg, #d4af37, #f1c40f); color: #000;
-            font-weight: bold; font-size: 16px; cursor: pointer; transition: 0.3s; margin-top: 10px;
-        }
-        .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #ccc; margin-top: 15px; }
-        .result-box {
-            margin-top: 25px; padding: 20px; border-radius: 8px;
-            background: rgba(13, 11, 24, 0.6); border-left: 4px solid #f1c40f;
-            white-space: pre-line; line-height: 1.8; font-size: 15px; max-height: 450px; overflow-y: auto;
-        }
-        .quote-box {
-            font-style: italic; background: rgba(241, 196, 15, 0.08);
-            padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px dashed rgba(241, 196, 15, 0.4);
-        }
-        #imagePreview { max-width: 100%; max-height: 250px; margin-top: 10px; border-radius: 8px; display: none; }
-    </style>
+    <!-- Đã sửa tên tab trình duyệt ở đây -->
+    <title>A private place for spirituality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="container">
+    
+    <!-- MÀN HÌNH CHỜ 1 -->
     <div id="landingPage" class="section-page">
-        <h1>☯ KHÍ ĐẠO THẦN CƠ ☯</h1>
-        <p style="text-align: center; margin-bottom: 25px; color: #94a3b8;">Chọn một phương thức để khởi tạo quẻ vận:</p>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="switchSection('landingPage', 'quePage')">
-                <h3>📜 Gieo Quẻ Thi Văn</h3>
-                <p style="font-size: 13px;">Rút quẻ ngẫu nhiên nhận triết lý danh nhân & lời giải chi tiết.</p>
-            </div>
-            <div class="menu-card" onclick="switchSection('landingPage', 'tuViPage')">
-                <h3>🖼️ Xem Lá Số Tử Vi</h3>
-                <p style="font-size: 13px;">Tải ảnh lá số tử vi lên để Thầy AI đọc & luận giải định mệnh.</p>
-            </div>
-        </div>
+        <!-- Đã sửa tiêu đề chính -->
+        <h1 class="main-title">A private place for spirituality</h1>
+        <!-- Đã sửa hàm onclick mở Pop-up Lựa Chọn -->
+        <button class="btn btn-enter" onclick="openChoiceModal()">VÀO ĐÂY</button>
+        <br>
+        <a href="https://web.facebook.com/chuhetrongrapxiec/" target="_blank" class="admin-link">Facebook</a>
     </div>
 
-    <div id="quePage" class="section-page hidden">
-        <h2>📜 GIEO QUẺ THI VĂN NGẪU NHIÊN</h2>
+    <!-- POP-UP LỰA CHỌN -->
+    <div id="choiceModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 400px; text-align: center; padding: 25px;">
+            <span class="close-btn" onclick="closeChoiceModal()">&times;</span>
+            
+            <h3 style="color: #f1c40f; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                Xin chào, bạn muốn xem năng lượng bản thân dưới một vị khách ẩn danh hay bằng danh nghĩa thật?
+            </h3>
+            
+            <p style="font-size: 13px; color: #aaa; margin-bottom: 20px;">
+                Đăng nhập giúp bạn lưu lại lá số và lịch sử gieo quẻ cho lần sau.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="btn" onclick="goToAuth('login')">🔑 Đăng Nhập</button>
+                <button class="btn" onclick="goToAuth('register')" style="background: #3498db;">📝 Đăng Ký</button>
+                <button class="btn btn-secondary" onclick="loginAsGuest()">🕵️ Tiếp Tục Với Dạng Khách</button>
+            </div>
+        </div>
+    </div> 
+
+    <!-- MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div id="authPage" class="section-page hidden">
+        <h2 id="authTitle">ĐĂNG NHẬP</h2>
         <div class="form-group">
-            <label>Nhập điều bạn đang trăn trở / thắc mắc:</label>
+            <label>Email:</label>
+            <input type="email" id="authEmail" placeholder="Nhập email của bạn">
+        </div>
+        <div class="form-group">
+            <label>Mật khẩu:</label>
+            <input type="password" id="authPassword" placeholder="Nhập mật khẩu">
+        </div>
+
+        <button class="btn" id="authBtn" onclick="handleAuth()">Đăng Nhập</button>
+        
+        <p style="margin-top: 15px; font-size: 13px; color: #aaa;">
+            <span id="authToggleText">Chưa có tài khoản?</span> 
+            <a href="#" id="authToggleLink" onclick="toggleAuthMode()" style="color: #f1c40f;">Đăng ký ngay</a>
+        </p>
+        <button class="btn btn-secondary" onclick="switchSection('authPage', 'landingPage')">⬅️ Quay lại</button>
+    </div>
+
+    <!-- MÀN HÌNH CHỜ 2 (NĂNG LƯỢNG CỦA NGÀY) -->
+    <div id="selectMenuPage" class="section-page hidden">
+        <h2 class="sub-title">Năng lượng của ngày</h2>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openQuePage()">
+                <h3>Quẻ</h3>
+            </div>
+            <div class="menu-card" onclick="openTuViPage()">
+                <h3>Tử vi</h3>
+            </div>
+        </div>
+        <button class="btn btn-secondary" onclick="logout()">🚪 Đăng xuất</button>
+    </div>
+
+    <!-- MÀN HÌNH GIEO QUẺ -->
+    <div id="quePage" class="section-page hidden">
+        <h2>📜 GIEO QUẺ THI VĂN</h2>
+        <div class="form-group">
+            <label>Nhập điều bạn đang trăn trở (hoặc để trống):</label>
             <textarea id="queQuestion" rows="3" placeholder="Ví dụ: Công việc sắp tới của tôi có suôn sẻ không?"></textarea>
         </div>
         <button class="btn" onclick="gieoQue()">🎲 Bốc Quẻ Ngẫu Nhiên</button>
@@ -86,13 +93,22 @@
                 <div id="queAnalysis"></div>
             </div>
         </div>
-        <button class="btn btn-secondary" onclick="switchSection('quePage', 'landingPage')">⬅️ Quay lại trang chủ</button>
+        <button class="btn btn-secondary" onclick="switchSection('quePage', 'selectMenuPage')">⬅️ Quay lại</button>
     </div>
 
+    <!-- MÀN HÌNH TỬ VI -->
     <div id="tuViPage" class="section-page hidden">
-        <h2>🖼️ ĐỌC LÁ SỐ TỬ VI QUA ẢNH</h2>
-        <div class="form-group">
-            <label>Tải ảnh Bảng Lá Số Tử Vi của bạn lên:</label>
+        <h2>🖼️ ĐỌC LÁ SỐ TỬ VI</h2>
+        
+        <div id="savedImageContainer" class="hidden" style="margin-bottom: 20px;">
+            <p style="color: #2ecc71; margin-bottom: 8px;">✅ Đã tìm thấy lá số đã lưu của bạn!</p>
+            <img id="savedImagePreview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+            <br>
+            <button class="btn btn-secondary" onclick="changeImageMode()" style="width: auto; padding: 6px 15px; font-size: 12px;">Đổi ảnh khác</button>
+        </div>
+
+        <div class="form-group" id="uploadGroup">
+            <label>Tải ảnh Bảng Lá Số Tử Vi lên:</label>
             <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
             <img id="imagePreview" alt="Lá số preview">
         </div>
@@ -102,23 +118,133 @@
         </div>
         <button class="btn" onclick="luanLaSo()">🔮 AI Luận Giải Lá Số</button>
 
-        <div id="tuViResult" class="result-box hidden"></div>
-        <button class="btn btn-secondary" onclick="switchSection('tuViPage', 'landingPage')">⬅️ Quay lại trang chủ</button>
+        <!-- KHUNG KẾT QUẢ TỬ VI -->
+        <div id="tuViResult" class="hidden" style="margin-top: 25px;">
+            <div class="tv-banner">
+                <span class="tv-quote-icon">✨</span>
+                <p id="tvQuote">Lời dẫn triết lý sẽ xuất hiện ở đây...</p>
+            </div>
+
+            <div class="tv-dashboard">
+                <div class="tv-main-grid">
+                    <div class="tv-card" id="card1">
+                        <div class="tv-card-header">
+                            <span>1. Bản Thể & Tính Cách</span>
+                            <span class="tv-badge" id="score1">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content1">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card2">
+                        <div class="tv-card-header">
+                            <span>2. Sự Nghiệp & Tài Chính</span>
+                            <span class="tv-badge" id="score2">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content2">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card3">
+                        <div class="tv-card-header">
+                            <span>3. Tình Duyên & Gia Đạo</span>
+                            <span class="tv-badge" id="score3">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content3">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card4">
+                        <div class="tv-card-header">
+                            <span>4. Môi Trường & Mối Quan Hệ</span>
+                            <span class="tv-badge" id="score4">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content4">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card5">
+                        <div class="tv-card-header">
+                            <span>5. Sức Khỏe & Tài Sản</span>
+                            <span class="tv-badge" id="score5">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content5">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card6">
+                        <div class="tv-card-header">
+                            <span>6. Vận Hạn Thời Gian</span>
+                            <span class="tv-badge" id="score6">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content6">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card7">
+                        <div class="tv-card-header">
+                            <span>7. Câu Hỏi Khác</span>
+                        </div>
+                        <div class="tv-card-body" id="content7">...</div>
+                    </div>
+
+                    <div class="tv-card tv-card-wide" id="cardTongQuan">
+                        <div class="tv-card-header">
+                            <span>📌 Tổng Quan Cả Lá Số</span>
+                        </div>
+                        <div class="tv-card-body" id="contentTongQuan">...</div>
+                    </div>
+                </div>
+
+                <div class="tv-side-card">
+                    <h3 style="font-size: 1.1em; color: #f1c40f;">🗓️ Ô NĂNG LƯỢNG NGÀY</h3>
+                    <div class="tv-day-score" id="tvDayScore">--/100</div>
+                    <div class="tv-day-status" id="tvDayStatus">Đang tính toán...</div>
+                    <hr class="tv-hr">
+                    <p class="tv-day-desc" id="tvDayDesc">Dữ liệu phân tích ngày hôm nay...</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="switchSection('tuViPage', 'selectMenuPage')">⬅️ Quay lại</button>
+    </div>
+
+</div>
+
+<!-- MODAL HỎI ĐÁP POPUP -->
+<div id="qaModal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeQAModal()">&times;</span>
+        <h3 id="modalTitle" style="color: #f1c40f; margin-bottom: 10px;">Hỏi đáp khía cạnh</h3>
+        <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Chọn câu hỏi gợi ý hoặc tự nhập câu hỏi riêng cho lá số của bạn:</p>
+        
+        <div id="suggestedQuestions" style="margin-bottom: 15px; text-align: left;"></div>
+
+        <div class="form-group">
+            <textarea id="customQuestionInput" rows="2" placeholder="Nhập câu hỏi chi tiết khác của bạn..."></textarea>
+        </div>
+        
+        <button class="btn" onclick="submitSingleQuestion()">🔮 Trả Lời Câu Hỏi</button>
+
+        <div id="qaResult" class="result-box hidden" style="margin-top: 15px; max-height: 200px;"></div>
     </div>
 </div>
 
-<script>
-    // 🔗 DÁN LINK CLOUDFLARE WORKER CỦA BẠN VÀO ĐÂY:
-    const WORKER_URL = "https://tuvi-api.username.workers.dev";
+<!-- THƯ VIỆN FIREBASE (NATIVE JS) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
-    const quotesList = [
-        { quote: "Chuyện cũ qua rồi, chuyện mới lại đến. Nước chảy mây trôi, lòng không vướng bận.", author: "Thiền sư Thích Nhất Hạnh" },
-        { quote: "Thiện căn ở tại lòng ta / Chữ tâm kia mới bằng ba chữ tài.", author: "Nguyễn Du (Truyện Kiều)" },
-        { quote: "Người ta chỉ nhìn thấy rõ ràng bằng trái tim. Cốt lõi là điều vô hình trong mắt dung tục.", author: "Antoine de Saint-Exupéry" },
-        { quote: "Cứ đi rồi sẽ đến, cứ gõ cửa rồi cửa sẽ mở.", author: "Triết lý phương Đông" },
-        { quote: "Sống trong đời sống cần có một tấm lòng, để làm gì em biết không? Để gió cuốn đi...", author: "Trịnh Công Sơn" },
-        { quote: "Vết thương là nơi ánh sáng đi vào bạn.", author: "Rumi" }
-    ];
+<script>
+    const WORKER_URL = "https://tuvi.phamphuongchi212010.workers.dev/";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjNIiA-4T_pbS3JejuyJh8Xngxt2Bw2Co",
+        authDomain: "a-private-place.firebaseapp.com",
+        projectId: "a-private-place",
+        storageBucket: "a-private-place.firebasestorage.app",
+        messagingSenderId: "236566880878",
+        appId: "1:236566880878:web:8e947d1c079bd8f1b8bc7f",
+        measurementId: "G-19TBLVH7FX"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
     function switchSection(currentId, targetId) {
         const currentEl = document.getElementById(currentId);
@@ -132,81 +258,12 @@
             setTimeout(() => targetEl.classList.remove('fade-out'), 50);
         }, 400);
     }
-
-    function previewImage(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.getElementById('imagePreview');
-                img.src = e.target.result;
-                img.style.display = 'block';
-            }
-            reader.readAsDataURL(file);
-        }
-    }
-
-    async function gieoQue() {
-        const randomQuote = quotesList[Math.floor(Math.random() * quotesList.length)];
-        const question = document.getElementById('queQuestion').value.trim();
-
-        document.getElementById('queResultContainer').classList.remove('hidden');
-        document.getElementById('quoteDisplay').innerHTML = `<strong>" ${randomQuote.quote} "</strong><br><small>— ${randomQuote.author}</small>`;
-        document.getElementById('queAnalysis').innerText = "☯ Thầy AI đang nghiệm quẻ từ câu thơ trên...";
-
-        const prompt = `Tôi rút được câu trích dẫn: "${randomQuote.quote}" của ${randomQuote.author}. Câu hỏi/trăn trở: "${question || 'Xin lời khuyên tổng quan'}". Hãy đóng vai Thầy Quẻ Kinh Dịch giải đáp sâu sắc cho tôi.`;
-
-        try {
-            const res = await fetch(WORKER_URL, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
-            const data = await res.json();
-            document.getElementById('queAnalysis').innerText = data.candidates[0].content.parts[0].text;
-        } catch (e) {
-            document.getElementById('queAnalysis').innerText = "Lỗi: " + e.message;
-        }
-    }
-
-    async function luanLaSo() {
-        const fileInput = document.getElementById('imageInput');
-        const userRequest = document.getElementById('tuViRequest').value.trim();
-        const resultDiv = document.getElementById('tuViResult');
-
-        if (!fileInput.files[0]) return alert('Vui lòng tải lên ảnh lá số tử vi!');
-
-        resultDiv.classList.remove('hidden');
-        resultDiv.innerText = "🔍 AI đang quét và đọc các cung sao trên lá số...";
-
-        const file = fileInput.files[0];
-        const reader = new FileReader();
-
-        reader.onloadend = async function() {
-            const base64Data = reader.result.split(',')[1];
-            const prompt = `Bạn là chuyên gia Tử Vi Đẩu Số cao cấp. Hãy đọc bảng lá số tử vi trong hình ảnh này và luận giải chi tiết. ${userRequest ? 'Yêu cầu thêm: ' + userRequest : ''}`;
-
-            try {
-                const res = await fetch(WORKER_URL, {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [
-                                { text: prompt },
-                                { inline_data: { mime_type: file.type, data: base64Data } }
-                            ]
-                        }]
-                    })
-                });
-                const data = await res.json();
-                resultDiv.innerText = data.candidates[0].content.parts[0].text;
-            } catch (e) {
-                resultDiv.innerText = "Lỗi xử lý ảnh: " + e.message;
-            }
-        };
-        reader.readAsDataURL(file);
-    }
 </script>
+
+<script src="auth.js"></script>
+<script src="menu.js"></script>
+<script src="que.js"></script>
+<script src="tuvi.js"></script>
+
 </body>
 </html>
