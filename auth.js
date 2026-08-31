@@ -134,3 +134,8 @@ function logout() {
         switchSection('selectMenuPage', 'landingPage');
     });
 }
+
+function openChoiceModal() {
+  const modal = document.getElementById('choiceModal');
+  if (modal) modal.classList.remove('hidden');
+}
