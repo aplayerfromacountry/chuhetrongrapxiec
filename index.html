@@ -7,18 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        /* Fix triệt để z-index để click chuẩn 100% */
+        /* Chỉ giữ đúng phần CSS cho Header, trả lại toàn bộ CSS gốc */
         .site-header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
@@ -26,12 +21,12 @@
             align-items: center;
             padding: 12px 24px;
             box-sizing: border-box;
-            z-index: 99999 !important; /* Luôn nổi lên trên cùng */
+            z-index: 9999;
         }
         .header-title {
             color: #f1c40f;
             font-family: 'Cookie', cursive;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin: 0;
         }
         .header-auth-btns {
@@ -39,15 +34,12 @@
             gap: 10px;
         }
         .btn-header {
-            padding: 8px 16px;
+            padding: 6px 14px;
             font-size: 13px;
-            font-weight: 600;
             border-radius: 6px;
             border: none;
-            cursor: pointer !important;
+            cursor: pointer;
             transition: all 0.2s ease;
-            position: relative;
-            z-index: 100000;
         }
         .btn-header-login {
             background: transparent;
@@ -65,10 +57,9 @@
         .btn-header-register:hover {
             background: #2980b9;
         }
+        /* Tạo khoảng trống ở trên để Header không che mất khung nội dung */
         .container {
-            padding-top: 90px !important;
-            position: relative;
-            z-index: 1;
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -78,8 +69,8 @@
 <header class="site-header">
     <h2 class="header-title">A private place</h2>
     <div class="header-auth-btns">
-        <button class="btn-header btn-header-login" onclick="openAuthDirect('login')">🔑 Đăng Nhập</button>
-        <button class="btn-header btn-header-register" onclick="openAuthDirect('register')">📝 Đăng Ký</button>
+        <button class="btn-header btn-header-login" onclick="openAuth('login')">🔑 Đăng Nhập</button>
+        <button class="btn-header btn-header-register" onclick="openAuth('register')">📝 Đăng Ký</button>
     </div>
 </header>
 
@@ -88,7 +79,7 @@
     <!-- MÀN HÌNH CHỜ 1 -->
     <div id="landingPage" class="section-page">
         <h1 class="main-title">A private place for spirituality</h1>
-        <button class="btn btn-enter" onclick="enterAsGuestDirect()">VÀO ĐÂY</button>
+        <button class="btn btn-enter" onclick="clickEnter()">VÀO ĐÂY</button>
         <br>
         <a href="https://web.facebook.com/chuhetrongrapxiec/" target="_blank" class="admin-link">Facebook</a>
     </div>
@@ -107,9 +98,9 @@
             </p>
 
             <div style="display: flex; flex-direction: column; gap: 10px;">
-                <button class="btn" onclick="openAuthDirect('login')">🔑 Đăng Nhập</button>
-                <button class="btn" onclick="openAuthDirect('register')" style="background: #3498db;">📝 Đăng Ký</button>
-                <button class="btn btn-secondary" onclick="enterAsGuestDirect()">🕵️ Tiếp Tục Với Dạng Khách</button>
+                <button class="btn" onclick="openAuth('login')">🔑 Đăng Nhập</button>
+                <button class="btn" onclick="openAuth('register')" style="background: #3498db;">📝 Đăng Ký</button>
+                <button class="btn btn-secondary" onclick="loginAsGuestDirect()">🕵️ Tiếp Tục Với Dạng Khách</button>
             </div>
         </div>
     </div> 
@@ -178,6 +169,7 @@
             <button class="btn btn-secondary" onclick="changeImageMode()" style="width: auto; padding: 6px 15px; font-size: 12px;">Đổi ảnh khác</button>
         </div>
 
+        <!-- Ô TẢI ĐÚNG ẢNH LÁ SỐ NGUYÊN BẢN -->
         <div class="form-group" id="uploadGroup">
             <label>Tải ảnh Bảng Lá Số Tử Vi lên:</label>
             <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
@@ -295,7 +287,7 @@
     </div>
 </div>
 
-<!-- THƯ VIỆN FIREBASE (NATIVE JS) -->
+<!-- THƯ VIỆN FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
@@ -317,25 +309,44 @@
     const auth = firebase.auth();
     const db = firebase.firestore();
 
+    /* GIỮ NGUYÊN HÀM CHUYỂN CẢNH MƯỢT CỦA BẠN */
     function switchSection(currentId, targetId) {
         const currentEl = document.getElementById(currentId);
         const targetEl = document.getElementById(targetId);
-        if (currentEl) {
-            currentEl.classList.add('hidden');
-            currentEl.classList.remove('fade-out');
-        }
-        if (targetEl) {
-            targetEl.classList.remove('hidden');
+        if (currentEl) currentEl.classList.add('fade-out');
+        setTimeout(() => {
+            if (currentEl) {
+                currentEl.classList.add('hidden');
+                currentEl.classList.remove('fade-out');
+            }
+            if (targetEl) {
+                targetEl.classList.add('fade-out');
+                targetEl.classList.remove('hidden');
+                setTimeout(() => targetEl.classList.remove('fade-out'), 50);
+            }
+        }, 400);
+    }
+
+    /* BỌC NÚT BẤM BẢO ĐẢM KHÔNG BỊ LỖI */
+    function clickEnter() {
+        const modal = document.getElementById('choiceModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+        } else {
+            switchSection('landingPage', 'selectMenuPage');
         }
     }
 
-    // Các hàm xử lý click trực tiếp
-    function enterAsGuestDirect() {
+    function loginAsGuestDirect() {
         closeChoiceModal();
-        switchSection('landingPage', 'selectMenuPage');
+        if (typeof loginAsGuest === 'function') {
+            loginAsGuest();
+        } else {
+            switchSection('landingPage', 'selectMenuPage');
+        }
     }
 
-    function openAuthDirect(mode) {
+    function openAuth(mode) {
         closeChoiceModal();
         if (typeof goToAuth === 'function') {
             goToAuth(mode);
