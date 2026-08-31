@@ -3,161 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Trải Nghiệm</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Đã sửa tên tab trình duyệt ở đây -->
+    <title>A private place for spirituality</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .hidden { display: none !important; }
-        .fade-out { opacity: 0; transition: opacity 0.3s ease; }
+        /* CSS Bổ sung cho Thanh Header cố định ở trên cùng */
+        .site-header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 24px;
+            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .header-title {
+            color: #f1c40f;
+            font-family: 'Cookie', cursive;
+            font-size: 1.6rem;
+            margin: 0;
+        }
+        .header-auth-btns {
+            display: flex;
+            gap: 10px;
+        }
+        .btn-header {
+            padding: 6px 14px;
+            font-size: 13px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .btn-header-login {
+            background: transparent;
+            color: #ddd;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-header-login:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .btn-header-register {
+            background: #3498db;
+            color: #fff;
+        }
+        .btn-header-register:hover {
+            background: #2980b9;
+        }
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col">
+<body>
 
-    <!-- HEADER LUÔN CỐ ĐỊNH Ở TRÊN CÙNG -->
-    <header class="w-full border-b border-slate-800 bg-slate-900/90 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="goToHome()">
-                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center font-bold text-white shadow-lg">
-                    A
-                </div>
-                <span class="text-xl font-bold text-white">Chú Hề Rạp Xiếc</span>
-            </div>
+<!-- THANH HEADER CỐ ĐỊNH Ở TRÊN CÙNG -->
+<header class="site-header">
+    <h2 class="header-title">A private place</h2>
+    <div class="header-auth-btns">
+        <button class="btn-header btn-header-login" onclick="goToAuth('login')">🔑 Đăng Nhập</button>
+        <button class="btn-header btn-header-register" onclick="goToAuth('register')">📝 Đăng Ký</button>
+    </div>
+</header>
 
-            <!-- NÚT ĐĂNG NHẬP / ĐĂNG KÝ TRÊN HEADER -->
-            <div id="headerAuthButtons" class="flex items-center space-x-3">
-                <button onclick="openAuthModal('login')" class="px-4 py-2 text-sm font-semibold text-slate-300 hover:text-white transition rounded-lg hover:bg-slate-800">
-                    Đăng nhập
-                </button>
-                <button onclick="openAuthModal('register')" class="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 transition rounded-lg shadow-md">
-                    Đăng ký
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- KHOẢNG TRỐNG NỘI DUNG CHÍNH -->
-    <main class="flex-grow flex items-center justify-center p-4 relative">
-        
-        <!-- SECTION 1: TRANG CHÀO MỪNG (HERO SECTION) -->
-        <section id="heroSection" class="text-center max-w-2xl mx-auto space-y-6">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-white">
-                Chào Mừng Bạn Đến Với Trải Nghiệm
-            </h1>
-            <p class="text-slate-400">
-                Bạn có thể trải nghiệm ngay tính năng không cần tài khoản, hoặc đăng nhập trên Header để lưu lại kết quả.
-            </p>
-            <div>
-                <!-- NÚT VÀO ĐÂY: VÀO THẲNG DẠNG KHÁCH -->
-                <button onclick="enterAsGuest()" class="px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold text-lg rounded-xl shadow-xl hover:scale-105 transition transform">
-                    VÀO ĐÂY
-                </button>
-            </div>
-        </section>
-
-        <!-- SECTION 2: GIAO DIỆN CHÍNH (XUẤT HIỆN SAU KHI BẤM "VÀO ĐÂY") -->
-        <section id="mainMenuSection" class="hidden text-center max-w-3xl mx-auto space-y-6">
-            <span class="px-3 py-1 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full text-xs font-semibold">
-                ● Đang trải nghiệm dưới dạng Khách
-            </span>
-            <h2 class="text-3xl font-bold text-white">Giao Diện Tính Năng Chính</h2>
-            <p class="text-slate-400">Chọn dịch vụ bạn muốn trải nghiệm bên dưới:</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-                <div class="p-5 bg-slate-800/60 border border-slate-700/60 rounded-xl hover:border-indigo-500 transition cursor-pointer">
-                    <h3 class="font-bold text-indigo-400 mb-1">Rút Quẻ</h3>
-                    <p class="text-xs text-slate-400">Xin quẻ may mắn, nhận lời khuyên cho ngày mới.</p>
-                </div>
-                <div class="p-5 bg-slate-800/60 border border-slate-700/60 rounded-xl hover:border-indigo-500 transition cursor-pointer">
-                    <h3 class="font-bold text-purple-400 mb-1">Xem Tử Vi</h3>
-                    <p class="text-xs text-slate-400">Tra cứu lá số tử vi và vận hạn chi tiết.</p>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- POP-UP ĐĂNG NHẬP / ĐĂNG KÝ -->
-    <div id="authModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 backdrop-blur-sm hidden">
-        <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl p-6 relative">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-            
-            <div class="flex border-b border-slate-800 mb-6">
-                <button id="tabLoginBtn" onclick="switchTab('login')" class="flex-1 py-2 text-sm font-semibold border-b-2 border-indigo-500 text-indigo-400">Đăng Nhập</button>
-                <button id="tabRegisterBtn" onclick="switchTab('register')" class="flex-1 py-2 text-sm font-semibold border-b-2 border-transparent text-slate-400">Đăng Ký</button>
-            </div>
-
-            <form id="loginForm" class="space-y-4" onsubmit="event.preventDefault(); alert('Đăng nhập thành công!'); closeAuthModal();">
-                <input type="email" required placeholder="Email của bạn" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                <input type="password" required placeholder="Mật khẩu" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl text-sm">Xác Nhận Đăng Nhập</button>
-            </form>
-
-            <form id="registerForm" class="space-y-4 hidden" onsubmit="event.preventDefault(); alert('Đăng ký thành công!'); closeAuthModal();">
-                <input type="text" required placeholder="Họ và tên" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                <input type="email" required placeholder="Email" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                <input type="password" required placeholder="Mật khẩu" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
-                <button type="submit" class="w-full py-3 bg-indigo-600 text-white font-semibold rounded-xl text-sm">Tạo Tài Khoản</button>
-            </form>
-        </div>
+<div class="container">
+    
+    <!-- MÀN HÌNH CHỜ 1 -->
+    <div id="landingPage" class="section-page">
+        <!-- Đã sửa tiêu đề chính -->
+        <h1 class="main-title">A private place for spirituality</h1>
+        <!-- Bấm VÀO ĐÂY -> Vào thẳng giao diện Khách -->
+        <button class="btn btn-enter" onclick="loginAsGuest()">VÀO ĐÂY</button>
+        <br>
+        <a href="https://web.facebook.com/chuhetrongrapxiec/" target="_blank" class="admin-link">Facebook</a>
     </div>
 
-    <!-- JAVASCRIPT ĐIỀU HƯỚNG MƯỢT MÀ -->
-    <script>
-        function switchSection(currentId, targetId) {
-            const currentEl = document.getElementById(currentId);
-            const targetEl = document.getElementById(targetId);
-            if (currentEl) currentEl.classList.add('hidden');
-            if (targetEl) targetEl.classList.remove('hidden');
-        }
+    <!-- POP-UP LỰA CHỌN -->
+    <div id="choiceModal" class="modal hidden">
+        <div class="modal-content" style="max-width: 400px; text-align: center; padding: 25px;">
+            <span class="close-btn" onclick="closeChoiceModal()">&times;</span>
+            
+            <h3 style="color: #f1c40f; margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5;">
+                Xin chào, bạn muốn xem năng lượng bản thân dưới một vị khách ẩn danh hay bằng danh nghĩa thật?
+            </h3>
+            
+            <p style="font-size: 13px; color: #aaa; margin-bottom: 20px;">
+                Đăng nhập giúp bạn lưu lại lá số và lịch sử gieo quẻ cho lần sau.
+            </p>
 
-        // Bấm nút "VÀO ĐÂY" -> Vào thẳng giao diện chính
-        function enterAsGuest() {
-            switchSection('heroSection', 'mainMenuSection');
-        }
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button class="btn" onclick="goToAuth('login')">🔑 Đăng Nhập</button>
+                <button class="btn" onclick="goToAuth('register')" style="background: #3498db;">📝 Đăng Ký</button>
+                <button class="btn btn-secondary" onclick="loginAsGuest()">🕵️ Tiếp Tục Với Dạng Khách</button>
+            </div>
+        </div>
+    </div> 
 
-        // Trở về trang chủ
-        function goToHome() {
-            switchSection('mainMenuSection', 'heroSection');
-        }
+    <!-- MÀN HÌNH ĐĂNG NHẬP / ĐĂNG KÝ -->
+    <div id="authPage" class="section-page hidden">
+        <h2 id="authTitle">ĐĂNG NHẬP</h2>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" id="authEmail" placeholder="Nhập email của bạn">
+        </div>
+        <div class="form-group">
+            <label>Mật khẩu:</label>
+            <input type="password" id="authPassword" placeholder="Nhập mật khẩu">
+        </div>
 
-        // Quản lý Pop-up Auth
-        function openAuthModal(mode) {
-            document.getElementById('authModal').classList.remove('hidden');
-            switchTab(mode);
-        }
+        <button class="btn" id="authBtn" onclick="handleAuth()">Đăng Nhập</button>
+        
+        <p style="margin-top: 15px; font-size: 13px; color: #aaa;">
+            <span id="authToggleText">Chưa có tài khoản?</span> 
+            <a href="#" id="authToggleLink" onclick="toggleAuthMode()" style="color: #f1c40f;">Đăng ký ngay</a>
+        </p>
+        <button class="btn btn-secondary" onclick="switchSection('authPage', 'landingPage')">⬅️ Quay lại</button>
+    </div>
 
-        function closeAuthModal() {
-            document.getElementById('authModal').classList.add('hidden');
-        }
+    <!-- MÀN HÌNH CHỜ 2 (NĂNG LƯỢNG CỦA NGÀY) -->
+    <div id="selectMenuPage" class="section-page hidden">
+        <h2 class="sub-title">Năng lượng của ngày</h2>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openQuePage()">
+                <h3>Quẻ</h3>
+            </div>
+            <div class="menu-card" onclick="openTuViPage()">
+                <h3>Tử vi</h3>
+            </div>
+        </div>
+        <button class="btn btn-secondary" onclick="logout()">🚪 Đăng xuất</button>
+    </div>
 
-        function switchTab(mode) {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            const tabLoginBtn = document.getElementById('tabLoginBtn');
-            const tabRegisterBtn = document.getElementById('tabRegisterBtn');
+    <!-- MÀN HÌNH GIEO QUẺ -->
+    <div id="quePage" class="section-page hidden">
+        <h2>📜 GIEO QUẺ THI VĂN</h2>
+        <div class="form-group">
+            <label>Nhập điều bạn đang trăn trở (hoặc để trống):</label>
+            <textarea id="queQuestion" rows="3" placeholder="Ví dụ: Công việc sắp tới của tôi có suôn sẻ không?"></textarea>
+        </div>
+        <button class="btn" onclick="gieoQue()">🎲 Bốc Quẻ Ngẫu Nhiên</button>
+        
+        <div id="queResultContainer" class="hidden">
+            <div class="result-box">
+                <div class="quote-box" id="quoteDisplay"></div>
+                <div id="queAnalysis"></div>
+            </div>
+        </div>
+        <button class="btn btn-secondary" onclick="switchSection('quePage', 'selectMenuPage')">⬅️ Quay lại</button>
+    </div>
 
-            if (mode === 'login') {
-                loginForm.classList.remove('hidden');
-                registerForm.classList.add('hidden');
-                tabLoginBtn.className = "flex-1 py-2 text-sm font-semibold border-b-2 border-indigo-500 text-indigo-400";
-                tabRegisterBtn.className = "flex-1 py-2 text-sm font-semibold border-b-2 border-transparent text-slate-400";
-            } else {
-                loginForm.classList.add('hidden');
-                registerForm.classList.remove('hidden');
-                tabRegisterBtn.className = "flex-1 py-2 text-sm font-semibold border-b-2 border-indigo-500 text-indigo-400";
-                tabLoginBtn.className = "flex-1 py-2 text-sm font-semibold border-b-2 border-transparent text-slate-400";
+    <!-- MÀN HÌNH TỬ VI -->
+    <div id="tuViPage" class="section-page hidden">
+        <h2>🖼️ ĐỌC LÁ SỐ TỬ VI</h2>
+        
+        <div id="savedImageContainer" class="hidden" style="margin-bottom: 20px;">
+            <p style="color: #2ecc71; margin-bottom: 8px;">✅ Đã tìm thấy lá số đã lưu của bạn!</p>
+            <img id="savedImagePreview" style="max-width: 100%; max-height: 200px; border-radius: 8px;">
+            <br>
+            <button class="btn btn-secondary" onclick="changeImageMode()" style="width: auto; padding: 6px 15px; font-size: 12px;">Đổi ảnh khác</button>
+        </div>
+
+        <div class="form-group" id="uploadGroup">
+            <label>Tải ảnh Bảng Lá Số Tử Vi lên:</label>
+            <input type="file" id="imageInput" accept="image/*" onchange="previewImage(event)">
+            <img id="imagePreview" alt="Lá số preview">
+        </div>
+        <div class="form-group">
+            <label>Yêu cầu cụ thể (Tùy chọn):</label>
+            <textarea id="tuViRequest" rows="2" placeholder="Ví dụ: Luận giải giúp tôi về Mệnh, Tài Bạch và Quan Lộc."></textarea>
+        </div>
+        <button class="btn" onclick="luanLaSo()">🔮 AI Luận Giải Lá Số</button>
+
+        <!-- KHUNG KẾT QUẢ TỬ VI -->
+        <div id="tuViResult" class="hidden" style="margin-top: 25px;">
+            <div class="tv-banner">
+                <span class="tv-quote-icon">✨</span>
+                <p id="tvQuote">Lời dẫn triết lý sẽ xuất hiện ở đây...</p>
+            </div>
+
+            <div class="tv-dashboard">
+                <div class="tv-main-grid">
+                    <div class="tv-card" id="card1">
+                        <div class="tv-card-header">
+                            <span>1. Bản Thể & Tính Cách</span>
+                            <span class="tv-badge" id="score1">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content1">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card2">
+                        <div class="tv-card-header">
+                            <span>2. Sự Nghiệp & Tài Chính</span>
+                            <span class="tv-badge" id="score2">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content2">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card3">
+                        <div class="tv-card-header">
+                            <span>3. Tình Duyên & Gia Đạo</span>
+                            <span class="tv-badge" id="score3">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content3">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card4">
+                        <div class="tv-card-header">
+                            <span>4. Môi Trường & Mối Quan Hệ</span>
+                            <span class="tv-badge" id="score4">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content4">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card5">
+                        <div class="tv-card-header">
+                            <span>5. Sức Khỏe & Tài Sản</span>
+                            <span class="tv-badge" id="score5">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content5">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card6">
+                        <div class="tv-card-header">
+                            <span>6. Vận Hạn Thời Gian</span>
+                            <span class="tv-badge" id="score6">--%</span>
+                        </div>
+                        <div class="tv-card-body" id="content6">...</div>
+                    </div>
+
+                    <div class="tv-card" id="card7">
+                        <div class="tv-card-header">
+                            <span>7. Câu Hỏi Khác</span>
+                        </div>
+                        <div class="tv-card-body" id="content7">...</div>
+                    </div>
+
+                    <div class="tv-card tv-card-wide" id="cardTongQuan">
+                        <div class="tv-card-header">
+                            <span>📌 Tổng Quan Cả Lá Số</span>
+                        </div>
+                        <div class="tv-card-body" id="contentTongQuan">...</div>
+                    </div>
+                </div>
+
+                <div class="tv-side-card">
+                    <h3 style="font-size: 1.1em; color: #f1c40f;">🗓️ Ô NĂNG LƯỢNG NGÀY</h3>
+                    <div class="tv-day-score" id="tvDayScore">--/100</div>
+                    <div class="tv-day-status" id="tvDayStatus">Đang tính toán...</div>
+                    <hr class="tv-hr">
+                    <p class="tv-day-desc" id="tvDayDesc">Dữ liệu phân tích ngày hôm nay...</p>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-secondary" onclick="switchSection('tuViPage', 'selectMenuPage')">⬅️ Quay lại</button>
+    </div>
+
+</div>
+
+<!-- MODAL HỎI ĐÁP POPUP -->
+<div id="qaModal" class="modal hidden">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeQAModal()">&times;</span>
+        <h3 id="modalTitle" style="color: #f1c40f; margin-bottom: 10px;">Hỏi đáp khía cạnh</h3>
+        <p style="font-size: 13px; color: #aaa; margin-bottom: 15px;">Chọn câu hỏi gợi ý hoặc tự nhập câu hỏi riêng cho lá số của bạn:</p>
+        
+        <div id="suggestedQuestions" style="margin-bottom: 15px; text-align: left;"></div>
+
+        <div class="form-group">
+            <textarea id="customQuestionInput" rows="2" placeholder="Nhập câu hỏi chi tiết khác của bạn..."></textarea>
+        </div>
+        
+        <button class="btn" onclick="submitSingleQuestion()">🔮 Trả Lời Câu Hỏi</button>
+
+        <div id="qaResult" class="result-box hidden" style="margin-top: 15px; max-height: 200px;"></div>
+    </div>
+</div>
+
+<!-- THƯ VIỆN FIREBASE (NATIVE JS) -->
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+
+<script>
+    const WORKER_URL = "https://tuvi.phamphuongchi212010.workers.dev/";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBjNIiA-4T_pbS3JejuyJh8Xngxt2Bw2Co",
+        authDomain: "a-private-place.firebaseapp.com",
+        projectId: "a-private-place",
+        storageBucket: "a-private-place.firebasestorage.app",
+        messagingSenderId: "236566880878",
+        appId: "1:236566880878:web:8e947d1c079bd8f1b8bc7f",
+        measurementId: "G-19TBLVH7FX"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    function switchSection(currentId, targetId) {
+        const currentEl = document.getElementById(currentId);
+        const targetEl = document.getElementById(targetId);
+        if (currentEl) currentEl.classList.add('fade-out');
+        setTimeout(() => {
+            if (currentEl) {
+                currentEl.classList.add('hidden');
+                currentEl.classList.remove('fade-out');
             }
-        }
-    </script>
+            if (targetEl) {
+                targetEl.classList.add('fade-out');
+                targetEl.classList.remove('hidden');
+                setTimeout(() => targetEl.classList.remove('fade-out'), 50);
+            }
+        }, 400);
+    }
+</script>
 
-    <!-- FILE JS BÊN NGOÀI -->
-    <script src="auth.js"></script>
-    <script src="menu.js"></script>
-    <script src="que.js"></script>
-    <script src="tuvi.js"></script>
+<script src="auth.js"></script>
+<script src="menu.js"></script>
+<script src="que.js"></script>
+<script src="tuvi.js"></script>
+
 </body>
 </html>
